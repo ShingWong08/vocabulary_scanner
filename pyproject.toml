@@ -1,0 +1,57 @@
+[build-system]
+requires = ["flit_core >= 3.12.0, <5"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "vocabulary_scanner"
+authors = [
+    {name = "Shing8981", email = "shingwong088@gmail.com"},
+    {name = "AndyTLY", email = "andytyl@gmail.com"},
+]
+readme = "README.md"
+
+# version 和 description 由 flit 從 __init__.py 的 __version__ 和 docstring 讀取
+dynamic = ["version", "description"]
+
+# 程式碼使用了 `str | None` 寫法，最低需要 Python 3.10
+requires-python = ">=3.10"
+keywords = ["cefr", "vocabulary", "english-learning", "education", "cli"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Education",
+    "Programming Language :: Python :: 3",
+    "Topic :: Education",
+]
+
+dependencies = [
+    "openpyxl>=3.1",       # 讀取 Excel、輸出 vocabulary_book.xlsx
+    "pdfplumber>=0.10",    # PDF 文字擷取
+    "pypdf>=4.0",          # pdfplumber 讀不到時的備用 PDF 讀取
+    "python-docx>=1.1",    # Word (.docx)
+    "nltk>=3.8",           # 詞形還原（ran -> run）與英文定義（WordNet）
+    "deep-translator>=1.11",  # --translate：Google 翻譯
+    "requests",               # --translate：MyMemory（Google 被擋時的備援）
+]
+
+[project.optional-dependencies]
+# 翻譯套件已移到必要套件；保留空的 translate 組，讓舊的 `pip install "vocabulary-scanner[translate]"` 指令不出警告
+translate = []
+# 掃描圖片 PDF 的 OCR（只支援 macOS，另需 Xcode 命令列工具）
+ocr = [
+    "pypdfium2>=4.30",
+    "pillow",
+]
+dev = [
+    "pytest",
+]
+
+[project.scripts]
+vocab-scanner = "vocabulary_scanner:main"
+
+[tool.flit.sdist]
+include = ["data/", "sample/", "tests/"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

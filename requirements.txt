@@ -1,0 +1,19 @@
+# vocabulary_scanner 需要的套件（版本範圍與 pyproject.toml 一致）
+#
+# 安裝：python -m pip install -r requirements.txt
+# 第一次使用還要下載 WordNet 資料：python -m nltk.downloader wordnet omw-1.4
+
+# 核心（必要）
+openpyxl>=3.1          # 讀取 Excel、輸出 vocabulary_book.xlsx
+pdfplumber>=0.10       # PDF 文字擷取
+pypdf>=4.0             # pdfplumber 讀不到時的備用 PDF 讀取
+python-docx>=1.1       # Word (.docx)
+nltk>=3.8              # 詞形還原（ran -> run）與英文定義（WordNet）
+deep-translator>=1.11  # --translate：Google 翻譯
+requests               # --translate：MyMemory（Google 被擋時的備援）
+
+# 掃描圖片 PDF 的 OCR（只支援 macOS，另需 Xcode 命令列工具；其他系統會自動略過）
+pypdfium2>=4.30; sys_platform == "darwin"
+pillow; sys_platform == "darwin"
+
+# 開發／測試另需：python -m pip install pytest
