@@ -1,6 +1,6 @@
 # CEFR Vocabulary Level Scanner for English Documents
 
-[中文](README.md) | **English**
+[中文](README.zh-hk.md) | **English**
 
 ## Overview
 
