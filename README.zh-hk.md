@@ -1,6 +1,6 @@
 # 英文文件 CEFR 單詞等級掃描工具
 
-**中文** | [English](README.en.md)
+**中文** | [English](README.md)
 
 ## 簡介
 
